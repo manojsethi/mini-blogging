@@ -9,6 +9,7 @@ import passportConfig from './config/passport';
 import { errorHandler } from './middleware/error_handler';
 import { notFound } from './middleware/not_found';
 import v1Routes from './api/v1/routes';
+import { setupSwagger } from './config/swagger';
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3001',
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173/',
   credentials: true
 }));
 
@@ -32,6 +33,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
+setupSwagger(app);
 
 app.use('/api/v1', v1Routes);
 
