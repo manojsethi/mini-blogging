@@ -3,26 +3,49 @@ import PATHS from "./path";
 import Signup from "../components/auth/signup";
 import Layout from "../components/shared/layout";
 import Login from "../pages/auth/login";
-import Dashboard from "../pages/dashboard";
+import Users from "../pages/dashboard/users";
+import Blogs from "../pages/dashboard/blogs";
+import Profile from "../pages/dashboard/profile";
+import ProtectedRoute from "./protectedRoute";
 
 export const routesConfig: RouteObject[] = [
   {
     path: "/",
     element: <Outlet />,
     children: [
-      { path: PATHS.AUTH.LOGIN, element: <Login /> },
-      { path: PATHS.AUTH.SIGNUP, element: <Signup /> },
+      {
+        path: PATHS.AUTH.LOGIN,
+        element: <ProtectedRoute requireAuth={false} children={<Login />} />,
+      },
+      {
+        path: PATHS.AUTH.SIGNUP,
+        element: <ProtectedRoute requireAuth={false} children={<Signup />} />,
+      },
       {
         path: PATHS.ROOT,
         element: (
-          <Layout>
-            <Outlet />
-          </Layout>
+          <ProtectedRoute
+            children={
+              <Layout>
+                <Outlet />{" "}
+              </Layout>
+            }
+          />
         ),
-        children: [{
-          index: true,
-          element: <Dashboard />
-        }]
+        children: [
+          {
+            path: PATHS.USERS,
+            element: <Users />,
+          },
+          {
+            path: PATHS.BLOGS,
+            element: <Blogs />,
+          },
+          {
+            path: PATHS.PROFILE,
+            element: <Profile />,
+          },
+        ],
       },
     ],
     // children: [

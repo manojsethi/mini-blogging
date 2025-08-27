@@ -1,0 +1,57 @@
+import { useEffect, useState } from "react";
+import type { IUserData } from "../../interfaces/response/user";
+import useApp from "antd/es/app/useApp";
+import services from "../../utils/services";
+import { Avatar, Card } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+
+const Users = () => {
+  const [userList, setUserList] = useState<IUserData[]>([]);
+  const [loader, setLoader] = useState<boolean>(false);
+  const { notification } = useApp();
+
+  const getUsers = async () => {
+    try {
+      setLoader(true);
+      const response = await services.getAllUsers();
+      if (!response.success) {
+        throw new Error(response?.error?.message ?? "Get posts failed");
+      }
+      setUserList(response.data);
+    } catch (error: any) {
+      notification.error({
+        message: error?.message ?? "Unexpected error occurs on getting posts!",
+      });
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  if (loader) {
+    return <p>loader....</p>;
+  }
+  return (
+    <div>
+      <h2 className="text-base text-primary font-medium">Users</h2>
+      <br />
+      <div className="grid grid-cols-3 gap-4">
+        {userList.map((user) => (
+          <Card key={user._id}>
+            <Avatar
+              src={<UserOutlined className="text-black" />}
+              size={"large"}
+            />
+            <p className="mt-4">{user.email}</p>
+            <p className="text-primary text-sm mt-1">{user.username}</p>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Users;

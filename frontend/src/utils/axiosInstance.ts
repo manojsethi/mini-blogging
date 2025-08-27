@@ -1,18 +1,17 @@
+// axiosInstance.ts
 import axios from "axios";
+import common from "../utils/common"; // where you already set/get blog_user cookie
 
-// Create an axios instance
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_NEXT_PUBLIC_API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  headers: { "Content-Type": "application/json" },
 });
 
-// Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Attach token if available
-    const token = localStorage.getItem("token");
+    const savedAuth = common.getCookie("blog_user");
+    const token = savedAuth ? JSON.parse(savedAuth)?.accessToken : null;
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -21,14 +20,12 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Add a response interceptor
 axiosInstance.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    // Handle global errors
     if (error.response?.status === 401) {
       console.error("Unauthorized! Logging out...");
-      // Optional: redirect to login
+      // redirect to login if needed
     }
     return Promise.reject(error);
   }

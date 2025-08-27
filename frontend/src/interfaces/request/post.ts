@@ -1,3 +1,4 @@
-export  interface ICreatePost {
-
+export interface IPost {
+  title: string;
+  description: string;
 }

@@ -1,41 +1,31 @@
+// config/passport.ts
 import passport from 'passport';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { userModal } from '../entities/user.entity';
 
 const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  // Crash early so you don't debug phantom auth failures
+  throw new Error('JWT_SECRET is not set');
+}
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: JWT_SECRET as string
+  secretOrKey: JWT_SECRET,
 };
 
 passport.use(
-  new JwtStrategy(jwtOptions, async (payload, done) => {
+  new JwtStrategy(jwtOptions, async (payload: any, done) => {
     try {
+      // Optional: check exp yourself if you don’t trust clock skew
       const user = await userModal.findById(payload.id).select('-password');
-      
-      if (!user || user.isDeleted) {
-        return done(null, false);
-      }
-      
+      if (!user || user.isDeleted) return done(null, false);
       return done(null, user);
-    } catch (error) {
-      return done(error, false);
+    } catch (err) {
+      return done(err, false);
     }
   })
 );
 
-passport.serializeUser((user: any, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id: string, done) => {
-  try {
-    const user = await userModal.findById(id).select('-password');
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
-});
-
+// No sessions used, so no serialize/deserialize needed
 export default passport;

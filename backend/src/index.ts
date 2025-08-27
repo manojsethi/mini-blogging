@@ -3,15 +3,16 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
+dotenv.config();
+
+import './config/passport';
 import passport from 'passport';
 import { connectDB } from './config/database';
-import passportConfig from './config/passport';
 import { errorHandler } from './middleware/error_handler';
 import { notFound } from './middleware/not_found';
 import v1Routes from './api/v1/routes';
 import { setupSwagger } from './config/swagger';
 
-dotenv.config();
 
 const app: Express = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +34,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
+
 setupSwagger(app);
 
 app.use('/api/v1', v1Routes);
