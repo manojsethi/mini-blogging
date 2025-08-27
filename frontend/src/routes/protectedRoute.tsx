@@ -15,7 +15,7 @@ export default function ProtectedRoute({
   const { pathname } = useLocation();
 
   if (loading) {
-    return  <Loader className="h-[50vh]"/>
+    return <Loader className="h-[50vh]" />;
   }
 
   if (requireAuth && !auth?.user) {

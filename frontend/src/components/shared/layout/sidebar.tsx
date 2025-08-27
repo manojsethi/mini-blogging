@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PATHS from "../../../routes/path";
 
 const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
@@ -17,25 +17,16 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       key: PATHS.USERS,
       icon: <UserOutlined />,
       label: "Users",
-      onClick: () => {
-        navigate(PATHS.USERS);
-      },
     },
     {
       key: PATHS.BLOGS,
       icon: <FileZipOutlined />,
       label: "Blogs",
-      onClick: () => {
-        navigate(PATHS.BLOGS);
-      },
     },
     {
       key: PATHS.PROFILE,
       icon: <ProfileOutlined />,
       label: "Profile",
-      onClick: () => {
-        navigate(PATHS.PROFILE);
-      },
     },
   ];
   return (
