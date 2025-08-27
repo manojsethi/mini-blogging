@@ -1,0 +1,38 @@
+Full Stack Mini-Blogging Platform Assignment
+Develop a full stack application for a simple mini-blogging website. The backend will be built using Node.js or Bun, and the frontend will use either React or Vue. All code must be written in TypeScript. Mini-blog posts will contain plain text only.
+ 
+Features to Implement:
+User Management
+User Sign Up: Allow users to create an account.
+User Login: Allow users to log in securely.
+List All Users: Display a list of all users on the platform.
+Mini-Blog Posts
+Create Post: Enable users to create new mini-blog posts.
+Edit Post: Allow users to modify their existing posts.
+Get Post: Display individual mini-blog posts.
+List User's Posts (User Profile): Show all posts created by a specific user.
+
+Features Not Required, but it’s a bonus to have
+User mentions (e.g., "@xxx" in Twitter)
+Comments and re-post functionality
+
+Technology Stack
+Backend: Node.js (TypeScript)
+Frontend: React (TypeScript)
+Database: database Mongodb
+
+Requirements
+Mini-blog post content is in plain text.
+Implement secure authentication and authorization.
+Implementation from scratch is not necessary, you can use a library / framework to implement it.
+The frontend should provide a user-friendly interface.
+The application should be responsive and work on different screen sizes.
+All code must be written in TypeScript, and should always follow the best coding practices. Make sure the code is understandable at all times.
+It is not necessary to write unit tests, but please make sure to have a happy-case integration test.
+
+Deliverables
+Full stack application with backend and frontend components.
+API documentation for the backend with OpenAPI (Swagger).
+
+Documentation on how to set up, run, and test the application.
+Source code repository (e.g., GitHub).
