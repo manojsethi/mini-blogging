@@ -40,7 +40,7 @@ const Blogs = () => {
       <h2 className="text-base text-primary">Blogs</h2>
       <br />
       {blogList?.length > 0 ? (
-        <div className="grid xl:grid-cols-3 grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4">
           {blogList.map((blog) => (
             <BlogCard blog={blog} key={blog._id} />
           ))}

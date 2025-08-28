@@ -39,7 +39,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   ];
   return (
     <Sider
-      className="bg-white relative"
+      className="bg-white min-h-[88vh] !relative"
       trigger={null}
       collapsible
       collapsed={collapsed}

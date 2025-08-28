@@ -41,7 +41,7 @@ const Users = () => {
     <div>
       <h2 className="text-base text-primary font-medium">Users</h2>
       <br />
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4">
         {userList.map((user) => (
           <Card className="relative" key={user._id}>
             <Avatar

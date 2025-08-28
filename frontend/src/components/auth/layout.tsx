@@ -9,8 +9,8 @@ const AuthLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <Card className="w-full shadow-lg max-w-[500px]">
+    <div className="flex justify-center items-center h-screen max-md:px-3">
+      <Card className="w-full shadow-lg md:max-w-[500px] max-w-[400px]">
         <div className="my-2">
           <h2 className="text-2xl font-semibold mb-5 text-center text-primary">
             {title}

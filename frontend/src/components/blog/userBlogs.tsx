@@ -80,7 +80,7 @@ const UserBlogs = ({
   const hasBlogs = blogList?.length > 0;
   return (
     <>
-      <div className=" w-full max-w-[600px]">
+      <div className="w-full max-w-[600px]">
         <Card>
           <div className="flex justify-center">
             <Avatar size={150} />
@@ -111,7 +111,7 @@ const UserBlogs = ({
       </div>
       {hasBlogs ? (
         <>
-          <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 mt-2">
+          <div className="grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
             {blogList.map((blog) => (
               <BlogCard
                 handleOnEdit={
