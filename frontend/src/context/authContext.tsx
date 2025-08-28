@@ -28,7 +28,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     } else {
       const savedAuth = common.getCookie("blog_user");
       if (savedAuth) {
-        setAuth(JSON.parse(savedAuth));
+        const parsedAuth = JSON.parse(savedAuth);
+        setAuth({
+          ...parsedAuth,
+          user: { ...parsedAuth.user, _id: parsedAuth?.user.id },
+        });
       }
     }
     setLoading(false);

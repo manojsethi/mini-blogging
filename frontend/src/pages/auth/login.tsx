@@ -20,7 +20,10 @@ const Login = () => {
       if (!response?.success) {
         throw new Error(response?.error?.message || "Login failed!");
       }
-      setAuth(response.data);
+      setAuth({
+        ...response.data,
+        user: { ...response.data.user, _id: response.data.user.id },
+      });
       notification.success({
         message: "Welcome Back",
         description: "You have successfully logged in.",

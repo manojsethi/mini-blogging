@@ -4,7 +4,10 @@ import type { ISignup } from "../interfaces/request/signup";
 import type { IBaseResponse } from "../interfaces/response/base";
 import type { ILoginResponse } from "../interfaces/response/login";
 import type { IPostResponse } from "../interfaces/response/post";
-import type { IUserResponse } from "../interfaces/response/user";
+import type {
+  IUserListResponse,
+  IUserResponse,
+} from "../interfaces/response/user";
 import axiosInstance from "./axiosInstance";
 
 class Services {
@@ -43,7 +46,14 @@ class Services {
       .catch((err) => err.response.data);
   }
 
-  getAllUsers(): Promise<IUserResponse> {
+  getUser(id: string): Promise<IUserResponse> {
+    return axiosInstance
+      .get(`/users/${id}`)
+      .then((res) => res)
+      .catch((err) => err.response.data);
+  }
+
+  getAllUsers(): Promise<IUserListResponse> {
     return axiosInstance
       .get("/users")
       .then((res) => res)
@@ -57,7 +67,7 @@ class Services {
       .catch((err) => err.response.data);
   }
 
-   deleteBlog(id: string): Promise<IPostResponse> {
+  deleteBlog(id: string): Promise<IPostResponse> {
     return axiosInstance
       .delete(`/posts/${id}`)
       .then((res) => res)

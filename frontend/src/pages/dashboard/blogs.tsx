@@ -32,7 +32,7 @@ const Blogs = () => {
   }, []);
 
   if (loader) {
-    return <Loader className="h-[50vh]" />;
+    return <Loader className="h-[25vh]" />;
   }
 
   return (
@@ -40,7 +40,7 @@ const Blogs = () => {
       <h2 className="text-base text-primary">Blogs</h2>
       <br />
       {blogList?.length > 0 ? (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid xl:grid-cols-3 grid-cols-2 gap-4">
           {blogList.map((blog) => (
             <BlogCard blog={blog} key={blog._id} />
           ))}

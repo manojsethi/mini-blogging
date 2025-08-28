@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import type { IUserData } from "../../interfaces/response/user";
 import useApp from "antd/es/app/useApp";
-import services from "../../utils/services";
-import { Avatar, Card } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Card, Tooltip } from "antd";
+import { EyeFilled, UserOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import services from "../../../utils/services";
+import type { IUserData } from "../../../interfaces/response/user";
+import Loader from "../../../components/shared/loader";
 
 const Users = () => {
   const [userList, setUserList] = useState<IUserData[]>([]);
   const [loader, setLoader] = useState<boolean>(false);
   const { notification } = useApp();
+  const navigate = useNavigate();
 
   const getUsers = async () => {
     try {
@@ -32,7 +35,7 @@ const Users = () => {
   }, []);
 
   if (loader) {
-    return <p>loader....</p>;
+    return <Loader className="h-[30vh]" />;
   }
   return (
     <div>
@@ -40,13 +43,23 @@ const Users = () => {
       <br />
       <div className="grid grid-cols-3 gap-4">
         {userList.map((user) => (
-          <Card key={user._id}>
+          <Card className="relative" key={user._id}>
             <Avatar
               src={<UserOutlined className="text-black" />}
               size={"large"}
             />
             <p className="mt-4">{user.email}</p>
             <p className="text-primary text-sm mt-1">{user.username}</p>
+            <Tooltip title="User blogs">
+              <Button
+                onClick={() => {
+                  navigate(`/user/${user._id}`);
+                }}
+                className=" text-primary absolute top-2 right-2"
+                type="text"
+                icon={<EyeFilled />}
+              />
+            </Tooltip>
           </Card>
         ))}
       </div>

@@ -15,18 +15,17 @@ const BlogCard = ({
 }) => {
   const { auth } = useContext(AuthContext);
   return (
-    <Card className="relative">
+    <Card className="relative pb-6">
       <h3 className="text-xl font-semibold">{blog.title}</h3>
       <p className="mt-3 text-lg">{blog.content}</p>
-      <p className="text-sm text-primary mt-3">
-        {blog.author._id === auth?.user.id ? (
+      <p className="text-sm text-primary mt-3 absolute bottom-4">
+        {blog.author.id === auth?.user.id ? (
           <span className="text-green-600">You</span>
         ) : (
-          <>
-            {blog.author.email} {`(${blog.author.username})`}
-          </>
+          <>{`(${blog.author.username})`}</>
         )}
       </p>
+
       <div className="absolute top-0 right-1">
         <div className="flex gap-x-3">
           {handleOnEdit && (
@@ -45,6 +44,8 @@ const BlogCard = ({
               icon={<DeleteFilled />}
             />
           )}
+
+         
         </div>
       </div>
     </Card>

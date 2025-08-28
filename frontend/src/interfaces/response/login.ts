@@ -1,17 +1,13 @@
 import type { IBaseResponse } from "./base"
+import type { IUserData } from "./user"
 
 export interface ILoginResponse extends IBaseResponse {
   data: ILoginResponseData
 }
 
 export interface ILoginResponseData {
-  user: User
+  user: IUserData
   refreshToken: string
   accessToken: string
 }
 
-export interface User {
-  id: string
-  email: string
-  username: string
-}

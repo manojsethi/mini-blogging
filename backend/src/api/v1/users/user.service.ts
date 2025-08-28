@@ -1,4 +1,4 @@
-import { userModal } from "../../../entities/user.entity";
+import { IUser, userModal } from "../../../entities/user.entity";
 import {
   InternalServerException,
   NotFoundException,
@@ -17,10 +17,10 @@ export interface ApiResponse<T = any> {
 }
 
 export class UserService {
-  public async getAllUsers(): Promise<ApiResponse> {
+  public async getAllUsers(loggedInUser: IUser): Promise<ApiResponse> {
     try {
       const users = await userModal
-        .find({ isDeleted: false })
+        .find({ isDeleted: false, _id: { $ne: loggedInUser._id } })
         .select("-password");
       return {
         success: true,

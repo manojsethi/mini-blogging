@@ -4,9 +4,9 @@ const PATHS = {
     SIGNUP: "/auth/signup",
   },
   ROOT: "/",
-  USERS: '/users',
-  BLOGS :"/blogs",
-  PROFILE:"/profile"
+  USERS: { ROOT: "/users", DETAIL: "/user/:id" },
+  BLOGS: "/blogs",
+  PROFILE: "/profile",
 };
 
 export default PATHS;

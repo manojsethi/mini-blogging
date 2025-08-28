@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import userService from "./user.service";
+import { IUser } from "../../../entities";
 
 export class UserController {
   /**
@@ -43,7 +44,8 @@ export class UserController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const result = await userService.getAllUsers();
+      const user=req.user
+      const result = await userService.getAllUsers(user as IUser);
       res.status(result.statusCode).json(result);
     } catch (error) {
       next(error);
