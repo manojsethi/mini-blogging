@@ -5,7 +5,9 @@ import { AuthContext } from "../../context/authContext";
 const Profile = () => {
   const { auth } = useContext(AuthContext);
 
-  return auth?.user && <UserBlogs canDelete canEdit user={auth.user} />;
+  return (
+    auth?.user && <UserBlogs canCreate canDelete canEdit user={auth.user} />
+  );
 };
 
 export default Profile;
